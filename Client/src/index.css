@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.setPos{
+    position:absolute;
+    top:230px;
+    left:400px;
+}
+
+.scrollNone::-webkit-scrollbar{
+    display:none;
+    }
