@@ -20,7 +20,7 @@ const PdfRender = () => {
 
   const fetchBookdetails = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/getBookdetails')
+      const res = await axios.get('https://ebook-orcin-alpha.vercel.app/api/getBookdetails')
       console.log('bookdetails', res.data)
       setBooks(res.data)
     }

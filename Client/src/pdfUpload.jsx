@@ -161,7 +161,7 @@ const PdfUpload =()=>{//
   try{
     if(book.title && book.author && book.publisher && book.eddition  && book.url ){
       console.log('storing in database....')
-      const dbres = await axios.post('http://localhost:3000/api/storeBookdetail',book)
+      const dbres = await axios.post('https://ebook-orcin-alpha.vercel.app/api/storeBookdetail',book)
       console.log('dbres',dbres)
       if(dbres){ 
         setUDetail({uploadUrl:true})

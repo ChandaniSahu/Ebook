@@ -13,7 +13,8 @@ setLogin({...login,[e.target.name]:e.target.value})
 const handleLogin = async() =>{
     try{ 
      console.log('login',login)   
-     const res = await axios.post('http://localhost:3000/api/login',login) 
+     const res = await axios.post('https://ebook-orcin-alpha.vercel.app
+/api/login',login) 
      console.log('login res',res)
      if(res.data.uname!=''||undefined){
         alert('logined sucessfully')

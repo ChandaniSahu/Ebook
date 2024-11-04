@@ -9,7 +9,8 @@ const Signup =()=>{
     const handleSignup = async() =>{
     try{
     console.log('signup',signup)
-    const res = await axios.post('http://localhost:3000/api/signup',signup)
+    const res = await axios.post('https://ebook-orcin-alpha.vercel.app
+/api/signup',signup)
     console.log('signup res',res)
     }
     catch(e){
