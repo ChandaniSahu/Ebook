@@ -1,7 +1,7 @@
 [
     {
-      "origin": ["http://localhost:5173"],
-      "method": ["GET"],
+      "origin": ["http://ebook-chandani.netlify.app"],
+      "method": ["GET","PUT","DELETE","PUT"],
       "responseHeader": ["Content-Type"],
       "maxAgeSeconds": 3600
     }
