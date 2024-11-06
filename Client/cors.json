@@ -1,8 +1,0 @@
-[
-    {
-      "origin": ["https://ebook-chandani.netlify.app/pdfrender"],
-      "method": ["GET","PUT","DELETE","PUT"],
-      "responseHeader": ["Content-Type"],
-      "maxAgeSeconds": 3600
-    }
-  ]

@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["https://ebook-chandani.netlify.app"],
+    "method": ["GET", "POST", "DELETE", "PUT"],
+    "responseHeader": ["Content-Type", "Authorization"],
+    "maxAgeSeconds": 3600
+  }
+]
