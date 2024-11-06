@@ -33,12 +33,15 @@ const PdfRender = () => {
     fetchBookdetails()
   }, [])
 
-
+useEffect(()=>{
+  console.log('uploadurl',uDetail.uploadUrl)
+})
   const searchBook = () => {
     let found = false
+    console.log('books in search() ',books)
     books.map((ele) => {
       if (search.toLowerCase() == ele.title.toLowerCase()) {
-        setSearchedBooks([...ele])
+        setSearchedBooks([ele])
         console.log(ele.title)
         found = true
         setSearching(true)
@@ -101,7 +104,7 @@ const PdfRender = () => {
                                 // <a href={ele.url} download={`${ele.title}.pdf`} target='_blank' rel="noopener noreferrer"
                                 //   onClick={(e) => { e.stopPropagation(); }}>
                                   <button className='bg-green-500 text-white rounded-xl w-[100px] px-[10px] py-[5px]' 
-                                  onClick={()=>{handleDonwloadPdf(ele.url)}}>Download</button>
+                                  onClick={()=>{handleDonwloadPdf(ele.url),setUDetail({uploadUrl:false})}}>Download</button>
                                 // </a>
                                 }
                             </div>
