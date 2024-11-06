@@ -5,6 +5,7 @@ import {context} from './App'
 
 const Navbar = () =>{
     const {click,setClick} = useContext(context)
+    // console.log('hello')
     return(
         <>
         <div className='flex items-center w-full  justify-between px-[20px] bg-[#5d4889] 
