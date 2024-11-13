@@ -16,7 +16,7 @@ const context = createContext()
 const App =() =>{
   
 
-  const [click,setClick] = useState('')
+  const [click,setClick] = useState('h')
   const [showDownload,setShowDownload] =useState(false)
   const [showUpload,setShowUpload] = useState(false)
   const[uDetail,setUDetail] = useState(()=>{

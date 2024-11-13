@@ -10,8 +10,8 @@ export default {
         white: '0 4px 30px rgba(255, 255, 255, 0.5)', // Adjust as needed
       },
       screens: {
-        tablet: { max: '1000px', min: '640px' }, // Custom media query
-  
+        repsive: { max: '960px', min: '0px' }, // Custom media query
+        navRes: { max: '634px', min: '0px' },
     },
   },
   plugins: [],

@@ -10,9 +10,9 @@ const ShowDownload =()=>{
     
     return(
         <>
-            <div className={showDownload === false && uDetail.uploadUrl===false ?' relative w-[350px] h-[130px] setPos text-center text-white bg-[#5d4889] rounded-[10px] ':'hidden' }style={{boxShadow:'1px 1px 10px 4px gray'}}>
+            <div className={showDownload === false && uDetail.uploadUrl?' relative w-auto h-auto setPos text-center text-white bg-[#5d4889] rounded-[10px] max-w-full ':'hidden' }style={{boxShadow:'1px 1px 10px 4px gray'}}>
             {/* <div className=' hidden'style={{boxShadow:'1px 1px 10px 4px gray'}}> */}
-            <div className='w-[330px] p-[5px] '> 
+            <div className='w-auto p-[5px] '> 
             <h1>Pdf uploaded successfully ! , now you can download pdf</h1><br/>
            <button className=' bg-green-500 rounded-xl w-[120px]  py-[5px]'
            onClick={()=>{navigate('/pdfrender');setShowDownload(true);setClick('l')}}>Download Now</button>

@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 
-.setPos{
+/* .setPos{
     position:absolute;
     top:230px;
-    left:400px;
-}
+    left:300px;
+} */
 
 .scrollNone::-webkit-scrollbar{
     display:none;

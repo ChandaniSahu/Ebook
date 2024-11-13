@@ -9,7 +9,7 @@ const ShowUpload =()=>{
     const{showUpload,setShowUpload} = useContext(context)
     return(
         <>
-        <div className={showUpload===true?'relative w-[400px] h-[130px] setPos text-center text-white bg-[#5d4889] rounded-[10px] ':'hidden'} style={{boxShadow:'1px 1px 10px 4px gray'}}>
+        <div className={showUpload===true?'relative w-[400px] h-[130px]  text-center text-white bg-[#5d4889] rounded-[10px] max-w-full':'hidden'} style={{boxShadow:'1px 1px 10px 4px gray'}}>
         
         <div className=' w-[375px] p-[10px] '>
              <h1>Sorry! You have to upload one Pdf after that you can download any one pdf</h1><br/>
