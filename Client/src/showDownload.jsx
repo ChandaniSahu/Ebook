@@ -1,28 +1,41 @@
-import React, { useContext, useState ,useEffect} from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ImCross } from "react-icons/im";
-import  {context}  from './App';
-const ShowDownload =()=>{
-    const navigate = useNavigate()
-    
-    const{setClick,uDetail,setShowDownload,showDownload} = useContext(context)
+import { context } from './App';
 
-    
-    return(
-        <>
-            <div className={showDownload === false && uDetail.uploadUrl?' relative w-auto h-auto setPos text-center text-white bg-[#5d4889] rounded-[10px] max-w-full ':'hidden' }style={{boxShadow:'1px 1px 10px 4px gray'}}>
-            {/* <div className=' hidden'style={{boxShadow:'1px 1px 10px 4px gray'}}> */}
-            <div className='w-auto p-[5px] '> 
-            <h1>Pdf uploaded successfully ! , now you can download pdf</h1><br/>
-           <button className=' bg-green-500 rounded-xl w-[120px]  py-[5px]'
-           onClick={()=>{navigate('/pdfrender');setShowDownload(true);setClick('l')}}>Download Now</button>
+const ShowDownload = () => {
+  const navigate = useNavigate()
+  const { setClick, uDetail, setShowDownload, showDownload } = useContext(context)
+
+  return (
+    <div className={showDownload === false && uDetail.uploadUrl ? 'fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm' : 'hidden'}>
+      <div className='relative bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border border-white/50 p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-100'>
+        <div className='text-center'>
+          <div className='mb-4'>
+            <svg className='w-16 h-16 text-green-500 mx-auto' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M5 13l4 4L19 7'></path>
+            </svg>
           </div>
-          <ImCross size='12px' className='absolute top-2 right-2' onClick={()=>{setShowDownload(true)}}/>
+          <h1 className='text-[#4e4cbd] font-semibold text-xl mb-6 leading-relaxed'>
+            PDF uploaded successfully! You can now download books.
+          </h1>
+          <button
+            className='bg-green-500 text-white rounded-xl px-8 py-3 font-medium hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl'
+            onClick={() => { navigate('/pdfrender'); setShowDownload(true); setClick('l') }}
+          >
+            Download Now
+          </button>
         </div>
-        
-        
-        </>
-    )
+
+        <button
+          className='absolute top-4 right-4 text-[#4e4cbd] hover:text-[#fb4a8b] transition-colors duration-200'
+          onClick={() => { setShowDownload(true) }}
+        >
+          <ImCross size='20px' />
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default ShowDownload

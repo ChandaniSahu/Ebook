@@ -50,7 +50,7 @@ const Home = () => {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <div className='pt-[50px] flex justify-between items-center min-h-screen relative overflow-hidden bg-gradient-to-br from-white via-[#f9f7ff] to-[#f0eaff] px-8'>
+    <div className='pt-[90px] flex justify-between items-center min-h-screen relative overflow-hidden bg-gradient-to-br from-white via-[#f9f7ff] to-[#f0eaff] px-8'>
       
       {/* Left Content with proper padding */}
       <div className='flex flex-col font-[Helvetica] relative z-10 max-w-2xl'>

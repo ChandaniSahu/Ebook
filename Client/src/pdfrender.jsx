@@ -37,9 +37,9 @@ const PdfRender = () => {
   useEffect(() => {
     console.log('uploadurl', uDetail.uploadUrl)
   })
+
   const searchBook = () => {
     let found = false
-    // console.log('books in search() ', books)
     books.map((ele) => {
       if (search.toLowerCase() == ele.title.toLowerCase()) {
         setSearchedBooks(ele)
@@ -47,10 +47,7 @@ const PdfRender = () => {
         found = true
         setSearching(true)
       }
-
     })
-    // console.log('srchedbooks',srchedBooks)
-    // setSearchedBooks(srchedBooks)
     if (found === false) {
       setSearchedBooks([])
       setSearching(true)
@@ -61,155 +58,183 @@ const PdfRender = () => {
     console.log('handleDownloadPdf', pdfUrl)
     try {
       const response = await fetch(pdfUrl);
-      const blob = await response.blob(); // Convert response to a Blob
+      const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
 
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'file.pdf'); // Specify file name
+      link.setAttribute('download', 'file.pdf');
       document.body.appendChild(link);
       link.click();
 
-      document.body.removeChild(link); // Clean up
-      window.URL.revokeObjectURL(url); // Revoke the object URL
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Download failed:', error);
     }
   }
+
   return (
-    <>
-      <div className='flex  bg-[#e6e0e3] h-[120vh] py-[100px] space-x-[10px] 
-      justify-between pr-[10px] scrollNone repsive:flex-col items-center '>
-        <div className='flex  flex-col     max-w-full' >
-          <div className='flex  items-center justify-center space-x-[10px] mb-[5px]  max-w-full '>
-            <input type='text' placeholder='Search book here....'
-              onChange={(e) => setSearch(e.target.value)} className='w-[220px]  max-w-full' style={{ boxShadow: '1px 1px 6px 2px gray' }} />
-            <button onClick={searchBook} className='bg-[#fb4a8b] text-white w-[80px]' style={{ boxShadow: '1px 1px 6px 2px gray' }}>Search</button>
-          </div>
-
-          <div className=' w-[320px] flex flex-col items-center h-[544px] overflow-auto repsive:h-[280px] max-w-full' >
-            {searching === false ?
-              <>
-                {books == '' ? <div className='mt-[30px]'><ThreeCircles color="#455867" height={50} width={50} /><h1>loading...</h1></div> : <>
-                  {books != '' &&
-                    <>
-                      {books.map((ele) => {
-                        return (
-                          <>
-                            <div className='w-[200px] h-[auto] bg-[#5d4889]  py-[10px] my-[10px] ml-[20px]  items-center 
-                      flex flex-col rounded-[10px] max-w-full' style={{ boxShadow: '1px 1px 10px 4px gray' }}>
-                              <img src={booklogo} width='100px' height='100px' />
-                              <h1 className='text-white  text-center '>{ele.title}</h1><br />
-
-                              <div className='flex flex-col  space-y-[10px]'>
-                                <button className='bg-[#fb4a8b] text-white rounded-xl w-[100px] 
-                          px-[10px] py-[5px]' onClick={() => setUrl(ele.url)}>Read</button>
-                                <div>
-                                  {uDetail.uploadUrl == false ? <button className='bg-green-500 text-white rounded-xl w-[100px] px-[10px] py-[5px]'
-                                    onClick={() => { setShowUpload(true); setClick('u') }} >Download</button> :
-                                    // <a href={ele.url} download={`${ele.title}.pdf`} target='_blank' rel="noopener noreferrer"
-                                    //   onClick={(e) => { e.stopPropagation(); }}>
-                                    <button className='bg-green-500 text-white rounded-xl w-[100px] px-[10px] py-[5px]'
-                                      onClick={() => { handleDonwloadPdf(ele.url), setUDetail({ uploadUrl: false }) }}>Download</button>
-                                    // </a>
-                                  }
-                                </div>
-                              </div>
-
-
-                            </div>
-
-                          </>
-                        )
-                      })}
-                    </>
-                  }</>}
-              </> :
-              <>
-                {searching && searchedBooks.length === 0 ? <h1>Not Found</h1> : <>
-                  {searchedBooks != '' &&
-                    <>
-                      {/* {searchedBooks.map((ele) => {
-                        return ( */}
-                          <>
-                            <div className='w-[200px] h-[auto] bg-[#5d4889]  py-[10px] my-[10px] ml-[20px] items-center  
-                                flex flex-col rounded-[10px] max-w-full' style={{ boxShadow: '1px 1px 10px 4px gray' }}>
-                              <img src={booklogo} width='100px' height='100px' />
-                              <h1 className='text-white  text-center '>{searchedBooks.title}</h1><br />
-
-                              <div className='flex flex-col  space-y-[10px]'>
-                                <button className='bg-[#fb4a8b] text-white rounded-xl w-[100px] 
-                                 px-[10px] py-[5px]' onClick={() => setUrl(searchedBooks.url)}>Read</button>
-                                <div>
-                                  {uDetail.uploadUrl == false ? <button className='bg-green-500 text-white rounded-xl w-[100px] px-[10px] py-[5px]'
-                                    onClick={() => { setShowUpload(true); setClick('u') }} >Download</button> :
-                                    <button className='bg-green-500 text-white rounded-xl w-[100px] px-[10px] py-[5px]'
-                                      onClick={() => { handleDonwloadPdf(searchedBooks.url) }}>Download</button>}
-                                </div>
-                              </div>
-
-
-                            </div>
-
-                          </>
-                    {/* //     )
-                    //   })}*/}
-                   </>
-                  }
-                </>}
-              </>}
-
-          </div>
+    <div className='pt-[90px] flex bg-gradient-to-br from-white via-[#f9f7ff] to-[#f0eaff] min-h-screen py-[50px] px-4 justify-between items-start max-w-full'>
+      {/* Book List Sidebar */}
+      <div className='flex flex-col w-full max-w-sm mx-4'>
+        {/* Search Section */}
+        <div className='flex items-center justify-center space-x-4 mb-6'>
+          <input
+            type='text'
+            placeholder='Search books...'
+            onChange={(e) => setSearch(e.target.value)}
+            className='w-48 px-4 py-3 border border-[#d6d4d5] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fb4a8b] focus:border-transparent transition-all duration-200'
+          />
+          <button
+            onClick={searchBook}
+            className='bg-gradient-to-r from-[#fb4a8b] to-[#ed65ed] text-white px-6 py-3 rounded-xl font-medium hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl'
+          >
+            Search
+          </button>
         </div>
 
+        {/* Books Container */}
+        <div className='flex flex-col items-center h-[600px] overflow-auto bg-white/70 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-4'>
+          {searching === false ? (
+            <>
+              {books == '' ? (
+                <div className='flex flex-col items-center justify-center h-full'>
+                  <ThreeCircles color="#4e4cbd" height={50} width={50} />
+                  <h1 className='text-[#4e4cbd] font-medium mt-4'>Loading books...</h1>
+                </div>
+              ) : (
+                <>
+                  {books != '' && books.map((ele) => (
+                    <div
+                      key={ele.id || ele.title}
+                      className='w-48 h-auto bg-gradient-to-br from-[#5d4889] to-[#4e4cbd] py-6 my-4 mx-2 flex flex-col items-center rounded-2xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 border border-white/30'
+                    >
+                      <img src={booklogo} width='80px' height='80px' className='mb-4 rounded-lg' />
+                      <h1 className='text-white text-center font-medium px-2 mb-4'>{ele.title}</h1>
 
+                      <div className='flex flex-col space-y-3 w-full px-4'>
+                        <button
+                          className='bg-gradient-to-r from-[#fb4a8b] to-[#ed65ed] text-white rounded-xl px-4 py-2 font-medium hover:scale-105 transition-all duration-200 shadow-md'
+                          onClick={() => setUrl(ele.url)}
+                        >
+                          Read
+                        </button>
+                        <div>
+                          {uDetail.uploadUrl == false ? (
+                            <button
+                              className='bg-green-500 text-white rounded-xl px-4 py-2 font-medium hover:scale-105 transition-all duration-200 shadow-md w-full'
+                              onClick={() => { setShowUpload(true); setClick('u') }}
+                            >
+                              Download
+                            </button>
+                          ) : (
+                            <button
+                              className='bg-green-500 text-white rounded-xl px-4 py-2 font-medium hover:scale-105 transition-all duration-200 shadow-md w-full'
+                              onClick={() => { handleDonwloadPdf(ele.url); setUDetail({ uploadUrl: false }) }}
+                            >
+                              Download
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              {searching && searchedBooks.length === 0 ? (
+                <div className='flex flex-col items-center justify-center h-full'>
+                  <h1 className='text-[#4e4cbd] font-medium text-xl'>No books found</h1>
+                  <p className='text-gray-500 mt-2'>Try a different search term</p>
+                </div>
+              ) : (
+                <>
+                  {searchedBooks != '' && (
+                    <div className='w-48 h-auto bg-gradient-to-br from-[#5d4889] to-[#4e4cbd] py-6 my-4 mx-2 flex flex-col items-center rounded-2xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 border border-white/30'>
+                      <img src={booklogo} width='80px' height='80px' className='mb-4 rounded-lg' />
+                      <h1 className='text-white text-center font-medium px-2 mb-4'>{searchedBooks.title}</h1>
 
-
-        {Url == '' ?
-          <div className='relative w-[850px]  bg-gray-300 h-[auto] p-[15px] rounded-lg  max-w-full ' style={{ boxShadow: '1px 1px 10px 4px gray' }}>
-
-
-            <h1 className='text-black font-[500] text-[40px] text-center'>Book Library</h1><br />
-            <h1 className='text-[35px] text-center '
-            >There are alots of book in this online Library , you can explore these
-              books and increase your knowledge ,You can</h1><br /><br />
-            <div className='flex justify-center gap-[130px] max-w-full '>
-              <span className='flex flex-col justify-center max-w-full' >
-                <img src={readbook} width='200px' height='200px' className='rounded-[50%]  hover:scale-105 max-w-full ' />
-                <h1 className='text-[40px] font-[Helvetica] '>Read</h1>
-              </span>
-
-              <span className='flex flex-col justify-center items-center max-w-full'>
-                <img src={downloadbook} width='200px' height='200px' className='rounded-[50%]  hover:scale-105 max-w-full' />
-                <h1 className='text-[40px] font-[Helvetica] '>Download</h1>
-              </span>
-
-
-            </div>
-            <div className='max-w-full absolute left-[90px] top-[120px]'>{showUpload && <ShowUpload />} </div>
-          </div> :
-          <div className='overflow-auto  w-[850px] h-[570px] z-0 max-w-full' style={{ boxShadow: '1px 1px 10px 4px gray' }}>
-            {
-              Url && <Pdf pdf={Url} />
-            }
-          </div>
-        }
-
+                      <div className='flex flex-col space-y-3 w-full px-4'>
+                        <button
+                          className='bg-gradient-to-r from-[#fb4a8b] to-[#ed65ed] text-white rounded-xl px-4 py-2 font-medium hover:scale-105 transition-all duration-200 shadow-md'
+                          onClick={() => setUrl(searchedBooks.url)}
+                        >
+                          Read
+                        </button>
+                        <div>
+                          {uDetail.uploadUrl == false ? (
+                            <button
+                              className='bg-green-500 text-white rounded-xl px-4 py-2 font-medium hover:scale-105 transition-all duration-200 shadow-md w-full'
+                              onClick={() => { setShowUpload(true); setClick('u') }}
+                            >
+                              Download
+                            </button>
+                          ) : (
+                            <button
+                              className='bg-green-500 text-white rounded-xl px-4 py-2 font-medium hover:scale-105 transition-all duration-200 shadow-md w-full'
+                              onClick={() => { handleDonwloadPdf(searchedBooks.url) }}
+                            >
+                              Download
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </div>
       </div>
 
+      {/* Main Content Area */}
+      {Url == '' ? (
+        <div className='flex-1 max-w-4xl mx-4'>
+          <div className='bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-white/50 p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl'>
+            <h1 className='text-[#864ea5] font-bold text-4xl text-center mb-6'>Book Library</h1>
+            <p className='text-gray-700 text-xl text-center leading-relaxed mb-8'>
+              Discover a vast collection of books across various genres. Read and download books from the comfort of your home.
+            </p>
 
+            <div className='flex justify-center gap-16 mb-8'>
+              <div className='flex flex-col items-center group'>
+                <img
+                  src={readbook}
+                  width='180px'
+                  height='180px'
+                  className='rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 group-hover:scale-110 mb-4 border-4 border-white'
+                />
+                <h1 className='text-[#4e4cbd] text-3xl font-semibold group-hover:scale-110 transition-all duration-300'>Read</h1>
+              </div>
 
-    </>
+              <div className='flex flex-col items-center group'>
+                <img
+                  src={downloadbook}
+                  width='180px'
+                  height='180px'
+                  className='rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 group-hover:scale-110 mb-4 border-4 border-white'
+                />
+                <h1 className='text-[#4e4cbd] text-3xl font-semibold group-hover:scale-110 transition-all duration-300'>Download</h1>
+              </div>
+            </div>
+
+            <div className='relative'>
+              {showUpload && <ShowUpload />}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className='flex-1 max-w-4xl mx-4'>
+          <div className='overflow-auto h-[700px] bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-white/50 p-4'>
+            {Url && <Pdf pdf={Url} />}
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 export default PdfRender
-// import { FaBook } from "react-icons/fa";
-// <FaBook />            
-
-
-
-
-
-
-
-
