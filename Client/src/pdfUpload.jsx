@@ -102,7 +102,7 @@ const PdfUpload = () => {
   return (
     <div className='pt-[100px] flex justify-center items-center min-h-screen bg-gradient-to-br from-white via-[#f9f7ff] to-[#f0eaff]'>
       <div className='max-w-lg w-full mx-4'>
-        <div className='bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-white/50 p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl'>
+        <div className='shadow-[0_0_10px_rgba(0,0,0,0.15)] mb-8 bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-white/50 p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl'>
           <h1 className='text-[#864ea5] font-[700] text-3xl text-center mb-8'>Upload PDF</h1>
 
           <div className='space-y-6'>

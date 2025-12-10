@@ -75,17 +75,28 @@ const PdfRender = () => {
   }
 
   return (
-    <div className='pt-[90px] flex bg-gradient-to-br from-white via-[#f9f7ff] to-[#f0eaff] min-h-screen py-[50px] px-4 justify-between items-start max-w-full'>
+    <div className='pt-[90px] flex-col space-y-6 sm:flex-row flex bg-gradient-to-br from-white via-[#f9f7ff] to-[#f0eaff] min-h-screen mx-auto py-[50px] px-4 justify-between items-start max-w-full'>
       {/* Book List Sidebar */}
-      <div className='flex flex-col w-full max-w-sm mx-4'>
+      <div className='flex flex-col w-full max-w-sm mx-4 pt-4 rounded-[20px] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]'>
         {/* Search Section */}
-        <div className='flex items-center justify-center space-x-4 mb-6'>
-          <input
-            type='text'
-            placeholder='Search books...'
-            onChange={(e) => setSearch(e.target.value)}
-            className='w-48 px-4 py-3 border border-[#d6d4d5] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fb4a8b] focus:border-transparent transition-all duration-200'
-          />
+        <div className='flex items-center justify-center space-x-4 mb-2'>
+          <div className='relative'>
+            <input
+              type='text'
+              placeholder='Search books...'
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className='w-48 px-4 py-3 pr-10 border border-[#d6d4d5] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#fb4a8b] focus:border-transparent transition-all duration-200'
+            />
+            {search && (
+              <button
+                onClick={() => { setSearch(''); setSearching(false); setSearchedBooks(''); }}
+                className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xl font-bold'
+              >
+                ×
+              </button>
+            )}
+          </div>
           <button
             onClick={searchBook}
             className='bg-gradient-to-r from-[#fb4a8b] to-[#ed65ed] text-white px-6 py-3 rounded-xl font-medium hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl'
@@ -193,8 +204,8 @@ const PdfRender = () => {
 
       {/* Main Content Area */}
       {Url == '' ? (
-        <div className='flex-1 max-w-4xl mx-4'>
-          <div className='bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-white/50 p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl'>
+        <div className='flex-1 max-w-4xl mx-4 rounded-[20px] shadow-2xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]'>
+          <div className='bg-white/80 backdrop-blur-md border rounded-[20px] border-white/50 p-8 transform transition-all duration-300  hover:shadow-3xl'>
             <h1 className='text-[#864ea5] font-bold text-4xl text-center mb-6'>Book Library</h1>
             <p className='text-gray-700 text-xl text-center leading-relaxed mb-8'>
               Discover a vast collection of books across various genres. Read and download books from the comfort of your home.
@@ -228,7 +239,7 @@ const PdfRender = () => {
           </div>
         </div>
       ) : (
-        <div className='flex-1 max-w-4xl mx-4'>
+        <div className='flex-1 max-w-4xl mx-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]'>
           <div className='overflow-auto h-[700px] bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-white/50 p-4'>
             {Url && <Pdf pdf={Url} />}
           </div>
